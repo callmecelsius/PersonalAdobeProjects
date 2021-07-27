@@ -99,7 +99,7 @@ $.runScript = {
 					
 					//block to insert exercise clip
 		            if (switchingVal == true) {
-						activeSeq.importMGT(localPathLAST,lastClip.end.seconds,3,3); //inserts circle reset
+						activeSeq.importMGT(localPathLAST,lastClip.end.seconds,8,8); //inserts circle reset
 						//inserts clip
 		                clip.setInPoint(myTime.ticks,4);
 		                myTime.seconds += num3;
@@ -107,8 +107,8 @@ $.runScript = {
 		                track.insertClip(clip, lastClip.end.seconds);
 		                //CHANGE TO COPY IN THE FUTURE TO SAVE IMPORT TIME
 						//inserts motion graphics
-		                activeSeq.importMGT(localPath,lastClip.end.seconds,1,1);
-		                activeSeq.importMGT(onCircle,lastClip.end.seconds,2,2);
+		                activeSeq.importMGT(localPath,lastClip.end.seconds,6,6);
+		                activeSeq.importMGT(onCircle,lastClip.end.seconds,7,7);
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
 		                for (j = 0; j < beeper; j ++){
@@ -120,7 +120,7 @@ $.runScript = {
 
 		            //block to insert resting clip
 		            else if (roundCounter < (exercises - 1) ) {
-		                activeSeq.importMGT(localPathLAST,lastClip.end.seconds,3,3);
+		                activeSeq.importMGT(localPathLAST,lastClip.end.seconds,8,8);
 						//inserts clip
 		                clip.setInPoint(myTime.ticks,4);
 		                myTime.seconds+= num4;
@@ -128,8 +128,8 @@ $.runScript = {
 		                track.insertClip(clip, lastClip.end.seconds);
 		                //CHANGE TO COPY IN THE FUTURE TO SAVE IMPORT TIME
 						//inserts motion graphics
-		                activeSeq.importMGT(localPath,lastClip.end.seconds,1,1);
-		                activeSeq.importMGT(offCircle,lastClip.end.seconds,2,2);
+		                activeSeq.importMGT(localPath,lastClip.end.seconds,6,6);
+		                activeSeq.importMGT(offCircle,lastClip.end.seconds,7,7);
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
 		                for (j = 0; j < beeper; j ++){
@@ -145,7 +145,7 @@ $.runScript = {
 
 					//for scenarios with breaks between rounds
 		            else if (roundBreakTime != 0) {
-		            	activeSeq.importMGT(localPathLAST,lastClip.end.seconds,3,3);
+		            	activeSeq.importMGT(localPathLAST,lastClip.end.seconds,8,8);
 		            	clip.setInPoint(myTime.ticks,4);
 		            	//rest interval
 		            	myTime.seconds += roundBreakTime;
@@ -153,8 +153,8 @@ $.runScript = {
 		            	track.insertClip(clip, lastClip.end.seconds);
 
 		            	//CHANGE TO COPY IN THE FUTURE TO SAVE IMPORT TIME
-		            	activeSeq.importMGT(localPath,lastClip.end.seconds,1,1);
-		            	activeSeq.importMGT(roundBreakCircle,lastClip.end.seconds,2,2);
+		            	activeSeq.importMGT(localPath,lastClip.end.seconds,6,6);
+		            	activeSeq.importMGT(roundBreakCircle,lastClip.end.seconds,7,7);
 
 		            	audioTrack.insertClip(audioClip2, lastClip.end.seconds);
 		            	for (j = 0; j < beeper; j ++){
@@ -174,8 +174,8 @@ $.runScript = {
 		        clip.setOutPoint(myTime.ticks,4);
 		        track.insertClip(clip,0);
 				//inserts motion graphics
-		        activeSeq.importMGT(localPath,0,1,1);
-		        activeSeq.importMGT(onCircle,0,2,2);
+		        activeSeq.importMGT(localPath,0,6,6);
+		        activeSeq.importMGT(onCircle,0,7,7);
 				//binary tracker
 		        switchingVal = false;
 		    }
