@@ -259,10 +259,10 @@ $.runScript = {
 		//shortcut names
 		var proj = app.project;
 		var activeSeq = proj.activeSequence;
-		var nestedMusicVol = activeSeq.audioTracks[3].clips[0].components[0].properties[1];
+		var nestedMusicVol = activeSeq.audioTracks[trackNum - 1].clips[0].components[0].properties[1];
 		var curMarker = activeSeq.markers.getFirstMarker();
 		//time objs
-		var nestedMusicTime = activeSeq.audioTracks[3].clips[0].start;
+		var nestedMusicTime = activeSeq.audioTracks[trackNum - 1].clips[0].start;
 		var markerTime;
 		var keyTracker = 2;
 		var keySwitch = true;

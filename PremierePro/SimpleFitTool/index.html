@@ -31,7 +31,7 @@ DESCRIPTION HERE
 			var tone2Num = document.getElementById('tone2Index').value;
 
 
-			var sendValues = 'var num1 = ' + num1 + ';var num2 =' + num2 + ';var num3 =' + num3 + ';var num4 =' + num4 + ';var num5 =' + num5 + ';var num6 =' + num6 + ';var clipNum =' + clipNum + ';var tone1Num =' + tone1Num + ';var tone2Num =' + tone2Num + ';var roundBreakTime =' + roundBreakTime + ';'
+			var sendValues = 'var num1 = ' + num1 + ';var num2 =' + num2 + ';var num3 =' + num3 + ';var num4 =' + num4 + ';var num5 =' + num5 + ';var num6 =' + num6 + ';var clipNum =' + clipNum + ';var tone1Num =' + tone1Num + ';var tone2Num =' + tone2Num + ';var roundBreakTime =' + roundBreakTime + ';' ;
 
 			cs.evalScript(sendValues + '$.runScript.setUpTool()');
 
@@ -50,7 +50,10 @@ DESCRIPTION HERE
 
 		function adjustVolume() {
 			var cs = new CSInterface;
-			cs.evalScript('$.runScript.addKeyFrames()')
+			var trackNum = document.getElementById('musicTrack').value;
+
+			var sendValues = 'var trackNum = ' + trackNum +';';
+			cs.evalScript(sendValues + '$.runScript.addKeyFrames()');
 		}
 
 
@@ -80,6 +83,7 @@ DESCRIPTION HERE
 		ol
 		{
 			list-style-position: outside;
+			text-align: left;
 
 		}
 	</style>
@@ -174,7 +178,12 @@ DESCRIPTION HERE
 	</table>
 </div>
 <hr>
-<div><button id="runButton" type="run" onclick="adjustVolume()">Add Music Key Frames</button></div>
+<div>
+	<h2>What Track is the music on?</h2>
+	<input type="text" id ="musicTrack">
+	<br>
+	<button id="runButton" type="run" onclick="adjustVolume()">Add Music Key Frames</button>
+</div>
 
 </body>
 
