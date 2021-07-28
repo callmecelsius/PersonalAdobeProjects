@@ -93,7 +93,7 @@ $.runScript = {
 		for(i = 0; i < counter; i++) {
 			
 			var lastClip = track.clips[track.clips.numItems - 1];
-			// var lastBeep = audioTrack.clips[track.clips.numItems - 1];
+			var lastBeep = audioTrack.clips[audioTrack.clips.numItems - 1];
 			
 		    //inserts clips accounting for other clips
 		    if (track.clips.numItems > 0) {
@@ -122,7 +122,9 @@ $.runScript = {
 		                activeSeq.importMGT(onCircle,lastClip.end.seconds,5,5);
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
-		                // app.project.activeSequence.markers.createMarker(lastBeep.end.seconds - (1 + j))
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
+		            	
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
 
@@ -151,6 +153,8 @@ $.runScript = {
 
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
 
@@ -183,6 +187,8 @@ $.runScript = {
 		            	activeSeq.importMGT(roundBreakCircle,lastClip.end.seconds,5,5);
 
 		            	audioTrack.insertClip(audioClip2, lastClip.end.seconds);
+		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
+		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
 		            	for (j = 0; j < beeper; j ++){
 
 		            	    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
