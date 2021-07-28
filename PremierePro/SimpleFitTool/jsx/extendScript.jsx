@@ -93,6 +93,7 @@ $.runScript = {
 		for(i = 0; i < counter; i++) {
 			
 			var lastClip = track.clips[track.clips.numItems - 1];
+			// var lastBeep = audioTrack.clips[track.clips.numItems - 1];
 			
 		    //inserts clips accounting for other clips
 		    if (track.clips.numItems > 0) {
@@ -121,8 +122,15 @@ $.runScript = {
 		                activeSeq.importMGT(onCircle,lastClip.end.seconds,5,5);
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
+		                // app.project.activeSequence.markers.createMarker(lastBeep.end.seconds - (1 + j))
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
+
+		                    if (j == beeper - 1){
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		                    }
+
 		                }
 						//binary tracking
 		                switchingVal = false;
@@ -140,11 +148,19 @@ $.runScript = {
 						//inserts motion graphics
 		                activeSeq.importMGT(localPath,lastClip.end.seconds,4,4);
 		                activeSeq.importMGT(offCircle,lastClip.end.seconds,5,5);
+
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
+
+		                    if (j == beeper - 1){
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		                    }
+
 		                }
+
 						//binary tracking
 		                switchingVal = true;
 						//for scenarios with breaks between rounds
@@ -168,7 +184,13 @@ $.runScript = {
 
 		            	audioTrack.insertClip(audioClip2, lastClip.end.seconds);
 		            	for (j = 0; j < beeper; j ++){
+
 		            	    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
+
+		            	    if (j == beeper - 1){
+		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
+		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		            	    }
 		            	}
 		            	switchingVal = true;
 		            	roundCounter = 0;
