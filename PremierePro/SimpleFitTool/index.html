@@ -48,6 +48,11 @@ DESCRIPTION HERE
 			cs.evalScript('$.runScript.searchProjectForItemByName(0,app.project.rootItem,"tone 2.wav")');
 		}
 
+		function adjustVolume() {
+			var cs = new CSInterface;
+			cs.evalScript('$.runScript.addKeyFrames()')
+		}
+
 
 	</script>
 	<style>
@@ -110,7 +115,20 @@ DESCRIPTION HERE
 		</tr>
 		<tr><th colspan="2"><button id="runButton" type="run" onclick="findIndex()">Find Indexes</button></th></tr>
 	</table>
+</div>
 <hr>
+<div class="steps">
+	<h1>Other Steps</h1>
+	<ol>
+		<li>Create 7 Total Video/Audio Tracks</li>
+		<li>Select all "next exercise" clips and correct</li>
+		<li>PiP</li>
+		<li>Apply default transitions to all (ctrl-d)</li>
+		<li>Adjustment Layer Color</li>
+	</ol>
+</div>
+<hr>
+<div>
 	<table>
 		<tr>
 			<th>Tone 1 Index</th>
@@ -121,7 +139,7 @@ DESCRIPTION HERE
 			<th><input type="text" id ="tone2Index"></th>
 		</tr>
 	</table>
-<hr>
+	<hr>
 	<table>
 		<tr>
 			<th>Start Time(sec)</th>
@@ -155,17 +173,9 @@ DESCRIPTION HERE
 		<tr><th colspan="2"><button id="runButton" type="run" onclick="runALL()">Run Script</button></th></tr>
 	</table>
 </div>
+<hr>
+<div><button id="runButton" type="run" onclick="adjustVolume()">Add Music Key Frames</button></div>
 
-<div class="steps">
-<h1>Other Steps</h1>
-<ol>
-	<li>Create 7 Total Video/Audio Tracks</li>
-	<li>Select all "next exercise" clips and correct</li>
-	<li>PiP</li>
-	<li>Apply default transitions to all (ctrl-d)</li>
-	<li>Adjustment Layer Color</li>
-</ol>
-</div>
 </body>
 
 </html>

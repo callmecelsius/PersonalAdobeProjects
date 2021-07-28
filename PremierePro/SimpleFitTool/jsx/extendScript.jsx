@@ -11,6 +11,8 @@ $.runScript = {
 	setUpTool: function() {
 
 		var proj = app.project;
+		var activeSeq = proj.activeSequence;
+
 		//CHANGE these timers to the appropriate intervals
 		var localPath = "C:\\Users\\inguy\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\Countdown timer bottom left 60s.mogrt";
 		var localPathNextExercise = "C:\\Users\\inguy\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\Next Exercise.mogrt";
@@ -28,14 +30,14 @@ $.runScript = {
 		"C:\\Users\\inguy\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\Countdown Circle 60s.mogrt"];
 		var localPathLAST = "C:\\Users\\inguy\\AppData\\Roaming\\Adobe\\Common\\Motion Graphics Templates\\Countdown Circle Reset.mogrt";
 
-		var activeSeq = app.project.activeSequence;
+		
 		var track = activeSeq.videoTracks[0];
 		var nextExercise = activeSeq.videoTracks[2];
 		var audioTrack = activeSeq.audioTracks[1];
-		var clip = app.project.rootItem.children[clipNum];
+		var clip = proj.rootItem.children[clipNum];
 		//TONES
-		var audioClip = app.project.rootItem.children[tone2Num];
-		var audioClip2 = app.project.rootItem.children[tone1Num];
+		var audioClip = proj.rootItem.children[tone2Num];
+		var audioClip2 = proj.rootItem.children[tone1Num];
 
 		var myTime = new Time();
 		var tickConst = 254016000000
@@ -122,15 +124,15 @@ $.runScript = {
 		                activeSeq.importMGT(onCircle,lastClip.end.seconds,5,5);
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
-		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
-		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds);
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1);
 		            	
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
 
 		                    if (j == beeper - 1){
-		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
-		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j));
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j));
 		                    }
 
 		                }
@@ -153,14 +155,14 @@ $.runScript = {
 
 						//inserts beeps
 		                audioTrack.insertClip(audioClip2, lastClip.end.seconds);
-		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
-		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds);
+		                app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1);
 		                for (j = 0; j < beeper; j ++){
 		                    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
 
 		                    if (j == beeper - 1){
-		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
-		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j));
+		                    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j));
 		                    }
 
 		                }
@@ -187,15 +189,15 @@ $.runScript = {
 		            	activeSeq.importMGT(roundBreakCircle,lastClip.end.seconds,5,5);
 
 		            	audioTrack.insertClip(audioClip2, lastClip.end.seconds);
-		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds)
-		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1)
+		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds);
+		            	app.project.activeSequence.markers.createMarker(lastBeep.end.seconds + 1);
 		            	for (j = 0; j < beeper; j ++){
 
 		            	    audioTrack.insertClip(audioClip, lastClip.end.seconds - (1 + j) );
 
 		            	    if (j == beeper - 1){
-		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j))
-		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j))
+		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (1 + j));
+		            	    	app.project.activeSequence.markers.createMarker(lastClip.end.seconds - (2 + j));
 		            	    }
 		            	}
 		            	switchingVal = true;
@@ -250,6 +252,50 @@ $.runScript = {
 			alert("The item was not found in bin:" + String(containingBin.name));
 			return itemFound;
 		}
-}
+	},
+
+	addKeyFrames : function(){
+
+		//shortcut names
+		var proj = app.project;
+		var activeSeq = proj.activeSequence;
+		var nestedMusicVol = activeSeq.audioTracks[3].clips[0].components[0].properties[1];
+		var curMarker = activeSeq.markers.getFirstMarker();
+		//time objs
+		var nestedMusicTime = activeSeq.audioTracks[3].clips[0].start;
+		var markerTime;
+		var keyTracker = 2;
+		var keySwitch = true;
+
+		const vol_0 = 0.17782793939114;
+		const vol_5 = 0.31622776389122;
+		const vol_n7 = 0.07943282276392;
+		const vol_n10= 0.0562341324985;
+		const vol_nInf = 0;
+
+		for (i = 0; i < activeSeq.markers.numMarkers; i++){
+
+			markerTime = curMarker.start;
+
+			if (keySwitch){
+			nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
+			nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_n7);
+			}
+
+			else {
+			nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
+			nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_0);
+			}
+
+			if (keyTracker == 2) {
+				keySwitch = !keySwitch;
+				keyTracker = 0;
+			}
+
+			curMarker = activeSeq.markers.getNextMarker(curMarker);
+			keyTracker += 1;
+		}
+
+	}
 
 }
