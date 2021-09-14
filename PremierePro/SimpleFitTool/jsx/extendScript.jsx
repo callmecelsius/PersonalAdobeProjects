@@ -259,14 +259,20 @@ $.runScript = {
 		//shortcut names
 		var proj = app.project;
 		var activeSeq = proj.activeSequence;
-		var nestedMusicVol = activeSeq.audioTracks[trackNum - 1].clips[0].components[0].properties[1];
+		//music
+		var nestedMusicVol = activeSeq.audioTracks[trackNum_M - 1].clips[0].components[0].properties[1];
+		var nestedMusicTime = activeSeq.audioTracks[trackNum_M - 1].clips[0].start;
+		//voice
+		var voiceVol = activeSeq.audioTracks[trackNum_V - 1].clips[0].components[0].properties[1];
+		var voiceTime = activeSeq.audioTracks[trackNum_V - 1].clips[0].start;
+
 		var curMarker = activeSeq.markers.getFirstMarker();
 		//time objs
-		var nestedMusicTime = activeSeq.audioTracks[trackNum - 1].clips[0].start;
 		var markerTime;
 		var keyTracker = 2;
 		var keySwitch = true;
 
+		//volume values
 		const vol_0 = 0.17782793939114;
 		const vol_5 = 0.31622776389122;
 		const vol_n7 = 0.07943282276392;
@@ -278,13 +284,22 @@ $.runScript = {
 			markerTime = curMarker.start;
 
 			if (keySwitch){
-			nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
-			nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_n7);
+				
+				nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
+				nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_n7);
+
+				voiceVol.addKey(markerTime.seconds - voiceTime.seconds);
+				voiceVol.setValueAtKey(markerTime.seconds - voiceTime.seconds, vol_nInf);
+
 			}
 
 			else {
-			nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
-			nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_0);
+
+				nestedMusicVol.addKey(markerTime.seconds - nestedMusicTime.seconds);
+				nestedMusicVol.setValueAtKey(markerTime.seconds - nestedMusicTime.seconds, vol_0);
+
+				voiceVol.addKey(markerTime.seconds - voiceTime.seconds);
+				voiceVol.setValueAtKey(markerTime.seconds - voiceTime.seconds, vol_0);
 			}
 
 			if (keyTracker == 2) {

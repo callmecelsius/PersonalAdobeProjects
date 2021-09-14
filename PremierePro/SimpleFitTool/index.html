@@ -50,9 +50,10 @@ DESCRIPTION HERE
 
 		function adjustVolume() {
 			var cs = new CSInterface;
-			var trackNum = document.getElementById('musicTrack').value;
+			var trackNum_M = document.getElementById('musicTrack').value;
+			var trackNum_V = document.getElementById('voiceTrack').value;
 
-			var sendValues = 'var trackNum = ' + trackNum +';';
+			var sendValues = 'var trackNum_M = ' + trackNum_M + ';var trackNum_V = ' + trackNum_V +';';
 			cs.evalScript(sendValues + '$.runScript.addKeyFrames()');
 		}
 
@@ -90,23 +91,6 @@ DESCRIPTION HERE
 </head>
 
 <body>
-	<!-- <p>Video File Name</p> -->
-	<!-- <input type="text" id ="videoClip"> -->
-<!-- 	<p>Main Clip</p>
-	<input type="text" id ="clipForSequence">
-	<p>Start Time in Seconds</p>
-	<input type="text" id ="Start">
-	<p># of Exercises</p>
-	<input type="text" id ="Exercises">
-	<p># of Rounds</p>
-	<input type="text" id ="Rounds">
-	<p>Exercise Time</p>
-	<input type="text" id ="onTime">
-	<p>Rest Time</p>
-	<input type="text" id ="offTime">
-	<p># of Beeps</p>
-	<input type="text" id ="Beeps">
- -->
  <div style="margin: auto;">
 	<table>
 		<tr>
@@ -129,6 +113,7 @@ DESCRIPTION HERE
 		<li>PiP</li>
 		<li>Apply default transitions to all (ctrl-d)</li>
 		<li>Adjustment Layer Color</li>
+		<li>To move markers with the entire timeline, ripple insert something at the front</li>
 	</ol>
 </div>
 <hr>
@@ -179,10 +164,12 @@ DESCRIPTION HERE
 </div>
 <hr>
 <div>
-	<h2>What Track is the music on?</h2>
+	<h2>What Track is the Music on?</h2>
 	<input type="text" id ="musicTrack">
+	<h2>What Track is the Voice on?</h2>
+	<input type="text" id ="voiceTrack">
 	<br>
-	<button id="runButton" type="run" onclick="adjustVolume()">Add Music Key Frames</button>
+	<button id="runButton" type="run" onclick="adjustVolume()">Add volume Key Frames</button>
 </div>
 
 </body>
