@@ -6,171 +6,131 @@ DESCRIPTION HERE
 -->
 <html>
 <title>Set Up Tool</title>
+
 <head>
-	<meta charset="utf-8">
-	<!-- <script src="./ext.js"></script> -->
-	<script src="./lib/CSInterface.js"></script>
-	<!-- <script src="./lib/jquery-1.9.1.js"></script> -->
-	<!-- <script src="./lib/Vulcan.js"></script> -->
-	<!-- <link id="ppstyle" href="css/style.css" rel="stylesheet" type="text/css"> -->
-	<script type="text/javascript">
+  <meta charset="utf-8">
+  <!-- <script src="./ext.js"></script> -->
+  <script src="./lib/CSInterface.js"></script>
+  <script src="./pluginFunctions.js"></script>
+  <!-- <script src="./lib/jquery-1.9.1.js"></script> -->
+  <!-- <script src="./lib/Vulcan.js"></script> -->
+  <!-- <link id="ppstyle" href="css/style.css" rel="stylesheet" type="text/css"> -->
 
-		function runALL(){
-			var cs = new CSInterface;
+  <style>
+    body {
+      background-color: #262626;
+      color: #f5f5f5;
+      text-align: center;
+    }
 
-			var num1 = document.getElementById('Exercises').value;
-			var num2 = document.getElementById('Rounds').value;
-			var num3 = document.getElementById('onTime').value;
-			var num4 = document.getElementById('offTime').value;
-			var num5 = document.getElementById('Start').value;
-			var num6 = document.getElementById('Beeps').value;
-			var roundBreakTime = document.getElementById('roundBreak').value;
+    input {
+      display: block;
+      margin: auto;
+      max-width: 100%;
 
-			var clipNum = document.getElementById('clipIndex').value;
-			var tone1Num = document.getElementById('tone1Index').value;
-			var tone2Num = document.getElementById('tone2Index').value;
+    }
 
+    div {
+      margin: auto;
+      max-width: 350px;
+    }
 
-			var sendValues = 'var num1 = ' + num1 + ';var num2 =' + num2 + ';var num3 =' + num3 + ';var num4 =' + num4 + ';var num5 =' + num5 + ';var num6 =' + num6 + ';var clipNum =' + clipNum + ';var tone1Num =' + tone1Num + ';var tone2Num =' + tone2Num + ';var roundBreakTime =' + roundBreakTime + ';' ;
+    ol {
+      list-style-position: outside;
+      text-align: left;
 
-			cs.evalScript(sendValues + '$.runScript.setUpTool()');
-
-			}
-
-		function findIndex() {
-
-			var cs = new CSInterface;
-
-			var clipName = document.getElementById('clipForSequence').value;
-
-			cs.evalScript('$.runScript.searchProjectForItemByName(0,app.project.rootItem,"' + clipName +'")');
-			cs.evalScript('$.runScript.searchProjectForItemByName(0,app.project.rootItem,"Tone 1.wav")');
-			cs.evalScript('$.runScript.searchProjectForItemByName(0,app.project.rootItem,"tone 2.wav")');
-		}
-
-		function adjustVolume() {
-			var cs = new CSInterface;
-			var trackNum_M = document.getElementById('musicTrack').value;
-			var trackNum_V = document.getElementById('voiceTrack').value;
-
-			var sendValues = 'var trackNum_M = ' + trackNum_M + ';var trackNum_V = ' + trackNum_V +';';
-			cs.evalScript(sendValues + '$.runScript.addKeyFrames()');
-		}
-
-
-	</script>
-	<style>
-		body
-		{
-			background-color: #262626;
-			color: #f5f5f5;
-			text-align: center;
-		}
-
-		input
-		{
-			display: block;
-			margin: auto;
-			max-width: 100%;
-
-		}
-
-		div
-		{
-			margin: auto;
-			max-width: 350px;
-		}
-
-		ol
-		{
-			list-style-position: outside;
-			text-align: left;
-
-		}
-	</style>
+    }
+  </style>
 </head>
 
 <body>
- <div style="margin: auto;">
-	<table>
-		<tr>
-			<th>Main Clip</th>
-			<th>Main Clip Index</th>
-		</tr>
-		<tr>
-			<th><input type="text" id ="clipForSequence"></th>
-			<th><input type="text" id ="clipIndex"></th>
-		</tr>
-		<tr><th colspan="2"><button id="runButton" type="run" onclick="findIndex()">Find Indexes</button></th></tr>
-	</table>
-</div>
-<hr>
-<div class="steps">
-	<h1>Other Steps</h1>
-	<ol>
-		<li>Create 7 Total Video/Audio Tracks</li>
-		<li>Select all "next exercise" clips and correct</li>
-		<li>PiP</li>
-		<li>Apply default transitions to all (ctrl-d)</li>
-		<li>Adjustment Layer Color</li>
-		<li>To move markers with the entire timeline, ripple insert something at the front</li>
-	</ol>
-</div>
-<hr>
-<div>
-	<table>
-		<tr>
-			<th>Tone 1 Index</th>
-			<th>Tone 2 Index</th>
-		</tr>
-		<tr>
-			<th><input type="text" id ="tone1Index"></th>
-			<th><input type="text" id ="tone2Index"></th>
-		</tr>
-	</table>
-	<hr>
-	<table>
-		<tr>
-			<th>Start Time(sec)</th>
-			<th># of Beeps</th>
-		</tr>
-		<tr>
-			<th><input type="text" id ="Start"></th>
-			<th><input type="text" id ="Beeps"></th>
-		</tr>
-		<tr>
-			<th># of Exercises</th>
-			<th># of Rounds</th>
-		</tr>
-		<tr>
-			<th><input type="text" id ="Exercises"></th>
-			<th><input type="text" id ="Rounds"></th>
-		</tr>
-		<tr>
-			<th>Exercise Time</th>
-			<th>Rest Time</th>
-		</tr>
-		<tr>
-			<th><input type="text" id ="onTime"></th>
-			<th><input type="text" id ="offTime"></th>
-		</tr>
-			<th colspan="2">Round Break</th>
-		</tr>
-		<tr>
-			<th colspan="2"><input type="text" id ="roundBreak"></th>
-		</tr>
-		<tr><th colspan="2"><button id="runButton" type="run" onclick="runALL()">Run Script</button></th></tr>
-	</table>
-</div>
-<hr>
-<div>
-	<h2>What Track is the Music on?</h2>
-	<input type="text" id ="musicTrack">
-	<h2>What Track is the Voice on?</h2>
-	<input type="text" id ="voiceTrack">
-	<br>
-	<button id="runButton" type="run" onclick="adjustVolume()">Add volume Key Frames</button>
-</div>
+  <div style="margin: auto;">
+    <table>
+      <tr>
+        <th>Main Clip</th>
+        <th>Main Clip Index</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="clipForSequence"></th>
+        <th><input type="text" id="clipIndex"></th>
+      </tr>
+      <tr>
+        <th colspan="2"><button id="runButton" type="run" onclick="findIndex()">Find Indexes</button></th>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <div class="steps">
+    <h1>Other Steps</h1>
+    <!-- instructions -->
+    <ol>
+      <li>Create 7 Total Video/Audio Tracks</li>
+      <li>Select all "next exercise" clips and correct</li>
+      <li>PiP</li>
+      <li>Apply default transitions to all (ctrl-d)</li>
+      <li>Adjustment Layer Color</li>
+      <li>To move markers with the entire timeline, ripple insert something at the front</li>
+    </ol>
+  </div>
+  <hr>
+  <div>
+    <!-- input boxes -->
+    <table>
+      <tr>
+        <th>Tone 1 Index</th>
+        <th>Tone 2 Index</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="tone1Index"></th>
+        <th><input type="text" id="tone2Index"></th>
+      </tr>
+    </table>
+    <hr>
+    <table>
+      <tr>
+        <th>Start Time(sec)</th>
+        <th># of Beeps</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="Start"></th>
+        <th><input type="text" id="Beeps"></th>
+      </tr>
+      <tr>
+        <th># of Exercises</th>
+        <th># of Rounds</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="Exercises"></th>
+        <th><input type="text" id="Rounds"></th>
+      </tr>
+      <tr>
+        <th>Exercise Time</th>
+        <th>Rest Time</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="onTime"></th>
+        <th><input type="text" id="offTime"></th>
+      </tr>
+      <th colspan="2">Round Break</th>
+      </tr>
+      <tr>
+        <th colspan="2"><input type="text" id="roundBreak"></th>
+      </tr>
+      <tr>
+        <th colspan="2"><button id="runButton" type="run" onclick="runALL()">Run Script</button></th>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <!-- volume adjust -->
+  <div>
+    <h2>What Track is the Music on?</h2>
+    <input type="text" id="musicTrack">
+    <h2>What Track is the Voice on?</h2>
+    <input type="text" id="voiceTrack">
+    <br>
+    <button id="runButton" type="run" onclick="adjustVolume()">Add volume Key Frames</button>
+  </div>
 
 </body>
 
